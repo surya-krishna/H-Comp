@@ -100,7 +100,7 @@ class gemini:
         # Open the images
         model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
         raw_response = model.generate_content(
-            ["""Extract information from the images of lab reports, process each image individually. test details will be in tabular format of reports. mark containsPII 1 if contains data like patientName or else 0. ReportDate as yyyy-MM-dd format like 2024-12-20 and it is not BirthDate it is more like printed date or reported date or collection date.  while extracting give the proper normalmin normalmax values like <90 for male implies normal min 0 and normal max 90.extract information from images and mask letters of PII data like patientName with X  using the mentioned JSON format
+            ["""Extract information from the images of lab reports, process each image individually. test details will be in tabular format of reports. mark containsPII 1 if contains data like patientName or else 0. ReportDate as yyyy-MM-dd format like 2024-12-20 and it is not BirthDate it is more like printed date or reported date or collection date.  while extracting give the proper normalmin normalmax values like <90 for male implies normal min 0 and normal max 90.extract information from images and mask most letters of PII data like patientName with X line if patientname is abcdefghijkl make it XXXXXXXXXjkl except for last 3 letters,  using the mentioned JSON format
             result = [{LabName:str,
             LabAddress:str,
             LabPhoneNumber:str,
