@@ -1,0 +1,89 @@
+<div class="section">
+<div class="row">
+<div class="col-lg-3 col-md-3 col-sm-6 col-11 dashed-box" (click)="this.router.navigateByUrl('/reportList')"><h5>Add Report</h5></div>
+</div>
+</div>
+<div class="row">
+<div class="col-6">
+    <div class="section">
+    <div *ngIf="freqTest.length!=0" class="row freq-tests">
+    <h6 class="col-11 header">Frequent Tests</h6>
+    <br/>
+    <div class="solid-box" *ngFor="let test of freqTest; let i=index">
+        <h6 class="test-desc" (click)="getTestDetails(test.testName)"><span>{{test.testName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge badge-secondary">{{test.count}}</span></h6>
+    </div>
+    <div *ngIf="freqTest.length>0" class="showall">
+        <h6 style="font-weight:0;"><a href="/testList">Show All</a></h6>
+    </div>
+    </div>
+    <div *ngIf="freqTest.length==0" class="row freq-tests">
+        <h6 class="col-11 header">Frequent Tests</h6>
+        <br/>
+        <div class="dashed-empty-box col-11"><h6>Add Reports to View Frequent Tests</h6></div>
+    </div>
+        
+</div>
+<br/>
+<div class="section">
+    <div *ngIf="recentReports.length!=0" class="row freq-tests">
+    <h6 class="col-11 header">Recent Reports</h6>
+    <br/>
+    <div class="solid-box" *ngFor="let repo of recentReports; let i=index">
+        <h6 class="test-desc" (click)="getReportDetails(repo.reportId)"><span>{{repo.labName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge badge-secondary">{{repo.reportDate}}</span></h6>
+    </div>
+    
+    <div *ngIf="recentReports.length>0" class="showall">
+        <h6 style="font-weight:0;"><a href="/reportList">Show All</a></h6>
+    </div>
+    </div>
+    <div *ngIf="recentReports.length==0" class="row freq-tests">
+        <h6 class="col-11 header">Recent Reports</h6>
+        <br/>
+        <div class="dashed-empty-box col-11"><h6>Add Reports to View Recent Reports</h6></div>
+    </div>
+    
+</div>
+</div>
+<!--
+<div class="row">
+<div class="section col-md-6 col-10">
+ 
+    <div class="row freq-tests">
+        <h6 class="col-11 header">Activity<span *ngIf="activitySample" style="font-size: 12px;"> (This is sample view, visit <a (click)="this.router.navigateByUrl('/activity');" style="color:#3c53da;">activity tab</a> to link your google account)</span></h6>
+        <br/>
+        <div *ngIf="this.stepFlag" class="chart mx-auto col-12 container">
+            <canvas  baseChart class="chart mx-auto col-12"
+                [data]="testBarChartData"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [type]="barChartType">
+          </canvas>
+        </div>
+        <div *ngIf="!this.stepFlag" class="dashed-empty-box col-11" style="height:200px;display: flex;align-items: center;"><h6 style="width:100%">Activity Stats</h6></div>
+    </div>
+    
+</div>
+<div class="section col-md-6 col-10">
+   
+    <div class="row freq-tests">
+        <h6 class="col-11 header">Nutrition<span *ngIf="nutriSample" style="font-size: 12px;"> (This is sample view, visit <a (click)="this.router.navigateByUrl('/activity');" style="color:#3c53da;">activity tab</a> to link your google account)</span></h6>
+        <br/>
+        <div *ngIf="this.showNutrition" class="chart mx-auto col-5">
+            <h6>Nutrition Intake</h6>
+            <canvas baseChart 
+            [data]="nutChartData"
+            [type]="doughnutChartType"
+            >
+          </canvas>
+        </div>
+        <div *ngIf="!this.showNutrition" class="dashed-empty-box col-11" style="height:200px;display: flex;align-items: center;"><h6 style="width:100%">Food Habits</h6></div>
+    </div>
+    </div>
+</div>
+-->
+
+<div class=" chat col-lg-5 col-md-5 col-sm-12 col-12">
+    <h6 style="font-weight:700;">Healthcare companion:</h6>
+    <app-chat></app-chat>
+</div>
+</div>

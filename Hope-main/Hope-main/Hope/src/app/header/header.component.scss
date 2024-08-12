@@ -1,0 +1,16 @@
+@import '../../global';
+
+.header-div{
+    background-color:$primary;
+    height:auto;
+    box-shadow: $shadow-attribute;
+    width:100%;
+    margin:none;
+    position:fixed;
+    z-index:999999;
+}
+.header-obj{
+    font-size: 15px;
+    color:$text-primary;
+    margin:10px;
+}

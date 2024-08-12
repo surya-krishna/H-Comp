@@ -1,0 +1,187 @@
+
+    <h6 class="header"> Report Main Details </h6>  
+    <div class="alert alert-success cust-alert" id="success-alert-detail">
+        <strong>Successfully Added Report</strong>
+      </div>
+      <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+        <strong>Failed to Add Report</strong>
+      </div>
+              <table class="table">
+                <tr>
+                    <td><h6><label for="labName">Lab Name</label></h6></td>
+                    <td>
+                        <input required class="form-control" type="text" name="labName" id="labName" #labName="ngModel" [(ngModel)]="this.inputData.labName">
+                        <span *ngIf="labName.invalid && (labName.dirty || labName.touched)" style="color:red">The Field is Required</span>
+                    </td>
+                    <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+                   
+                    <td><h6><label for="labPhone">Lab Phone</label></h6></td>
+                    <td>
+                        <input class="form-control" type="text" name="labPhone" id="labPhone" #labPhone="ngModel" [(ngModel)]="this.inputData.labPhone">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><h6><label for="labAddress">Lab Address</label></h6></td>
+                    <td colspan="2">
+                        <textarea class="form-control"  name="labAddress" id="labAddress" #labAddress="ngModel" [(ngModel)]="this.inputData.labAddress"></textarea>
+                    </td>
+                    <td></td>
+                    <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+                </tr>
+
+
+                <tr>
+                 <td><h6><label for="patientName">Patient Name</label><span style="color:red">*</span></h6><span data-toggle="tooltip" data-placement="top" title="Since this is a Personally identifiable information we will make half of the data masked before storing"><i class="fa-regular fa-circle-question"></i></span></td>
+                  <td>
+                    <input required class="form-control" type="text" name="patientName" id="patientName" #patientName="ngModel" [(ngModel)]="this.inputData.nameOnReport">
+                    <span *ngIf="patientName.invalid && (patientName.dirty || patientName.touched)" style="color:red">The Field is Required</span>
+                  </td>
+                  <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+                  <td><h6><label for="age">Age</label> <span style="color:red">*</span></h6></td>
+                  <td><input required class="form-control" type="number" name="age" id="age" #age="ngModel" [(ngModel)]="this.inputData.age">
+                    <span *ngIf="age.invalid && (age.dirty || age.touched)" style="color:red">The Field is Required</span>
+                  </td>
+                </tr>
+
+                <tr>
+                    <td><h6><label for="gender">Gender</label> <span style="color:red">*</span></h6></td>
+                     <td>  
+                        <select required class="form-control" placeholder="Select Option" name="gender" id="gender" #gender="ngModel" [(ngModel)]="this.inputData.gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <span *ngIf="gender.invalid && (gender.dirty || gender.touched)" style="color:red">The Field is Required</span>
+                     </td>
+                     <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+                    <td><h6><label for="reportDate"> Report Date</label><span style="color:red">*</span></h6></td>
+                    <td>
+                        <input required type="date" class="form-control"  name="reportDate" id="reportDate" #reportDate="ngModel" [(ngModel)]="this.inputData.reportDate">
+                        <span *ngIf="reportDate.invalid && (reportDate.dirty || reportDate.touched)" style="color:red">The Field is Required</span>
+                    </td>
+                </tr>
+               </table>
+
+
+               <h6 class="header"> Report Test Details </h6>  
+              <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name<span style="color:red">*</span></th>
+                        <th>Value<span style="color:red">*</span></th>
+                        <th>Units</th>
+                        <th>min</th>
+                        <th>max</th>
+                        <th colspan="2">Action</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                
+                <tr *ngFor="let test of this.inputData.userTestsList;let i=index">
+                    <td>
+                        <input type="text" required class="form-control" placeholder="Test Name" name="testName_{{i}}" id="testName_{{i}}" [(ngModel)]="this.inputData.userTestsList[i].testName">
+                           <!-- <option *ngFor="let tm of this.testMaster" [value]="tm.testId">
+                              {{tm.testName}}
+                            </option>-->
+                        <span *ngIf="false" style="color:red">The Field is Required</span>
+                    </td>
+
+                    <td >
+                        <input required type="text" class="form-control" placeholder="TestValue" name="testValue_{{i}}" id="testValue_{{i}}"  [(ngModel)]="this.inputData.userTestsList[i].testValue">
+                    </td>
+                    
+                    <td>
+                        <input type="text"  class="form-control" placeholder="Units" name="testUnit_{{i}}" id="testUnit_{{i}}" [(ngModel)]="this.inputData.userTestsList[i].units">
+                    </td>
+                    
+                    <td>
+                        <input  type="number" class="form-control" placeholder="test minimum value"  name="testMin_{{i}}" id="testMin_{{i}}"  [(ngModel)]="this.inputData.userTestsList[i].testMinNormal">
+                    </td>
+
+                    <td>
+                        <input  type="number" class="form-control" placeholder="test maximum value" name="testMax_{{i}}" id="testMax_{{i}}"  [(ngModel)]="this.inputData.userTestsList[i].testMaxNormal">
+                    </td>
+                    
+                    <td>
+                      <button class="btn btn-primary" *ngIf="this.lastIndex==i" title="Add new Test" (click)="addRow(i)"><i class="fa-solid fa-file-circle-plus"></i></button> 
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="deleteRow(i)" title="delete this test"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" (click)="addObservation(i)" title="Add observation and medication of the test"><i class="fa-solid fa-comment-dots"></i></button>
+                     </td>
+                </tr>
+              </table>
+              <div class="row" style="width:100%">
+                <span *ngIf="fails" style="color:red">Please fill all required fields</span>
+              <button class="btn btn-success col-4 mx-auto" *ngIf='statusText==""' title="Submit and upload report" (click)="addReport()">Submit and Upload</button>
+              <button class="btn btn-success mx-auto" *ngIf='statusText!=""' disabled="true">Background work {{statusText}}</button>
+                </div>
+                
+
+  <div class="modal" #addNotes id="addNotes">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h6 class="header modal-title">Notes For {{this.inputData.userTestsList[this.currInd]&&this.inputData.userTestsList[this.currInd].testMasterId && this.testMasterMap[this.inputData.userTestsList[this.currInd].testMasterId].testName}} <span data-toggle="tooltip" data-placement="top" title="If the results are not normal this notes can help in keeping track of observations and medications recommended by doctor"><i class="fa-regular fa-circle-question"></i></span></h6>
+          <button type="button" class="close" title="close notes" (click)="closeNotes(this.currInd)">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container row add-group-div">
+            <div class="alert alert-success cust-alert" id="success-alert-detail">
+              <strong>Successfully Added Notes</strong>
+            </div>
+            <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+              <strong>Failed to Add Notes</strong>
+            </div>
+            <div class="col-12">
+              
+              <table class="table">
+                <tr>
+                    <td><label for="observation_{{this.currInd}}"> Observation</label></td>
+                    <td colspan="2"><textarea class="form-control" id="observation_{{this.currInd}}"  name="observation_{{this.currInd}}"  [(ngModel)]="this.inputData.userTestsList[this.currInd]&&this.inputData.userTestsList[this.currInd].observation"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="suggestion_{{this.currInd}}"> Suggestions</label></td>
+                    <td colspan="2"><textarea class="form-control"  id="suggestion_{{this.currInd}}" name="suggestion_{{this.currInd}}"  [(ngModel)]="this.inputData.userTestsList[this.currInd]&&this.inputData.userTestsList[this.currInd].suggestion"></textarea></td>
+                </tr>
+                
+                <tr>
+                    <th>Medication <span data-toggle="tooltip" data-placement="top" title="Medication prescribed based on this test results"><i class="fa-regular fa-circle-question"></i></span></th>
+                    <th>Timing <span data-toggle="tooltip" data-placement="top" title="Medication intake timing"><i class="fa-regular fa-circle-question"></i></span></th>
+                    <th>Action <span data-toggle="tooltip" data-placement="top" title="Add or delete actions on entry"><i class="fa-regular fa-circle-question"></i></span></th>
+                </tr>
+                <tr *ngFor="let med of this.inputData.userTestsList[this.currInd].medication;let j=index">
+                    <td><input type="text" class="form-control" placeholder="Medication"  name="medication_{{this.currInd}}_{{j}}"  [(ngModel)]="this.inputData.userTestsList[this.currInd]&&this.inputData.userTestsList[this.currInd].medication[j].medication"></td>
+                    <td><select class="form-control" placeholder="Select Timing" name="timings_{{this.currInd}}_{{j}}" id="timings_{{this.currInd}}_{{j}}" [(ngModel)]="this.inputData.userTestsList[this.currInd]&&this.inputData.userTestsList[this.currInd].medication[j].timings">
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="night">Night</option>
+                    </select></td>
+                    <td>
+                       <button class="btn btn-primary" *ngIf="this.lastMedIndex==j" title="add new medication" (click)="addMedRow(this.currInd,j)"><i class="fa-solid fa-file-circle-plus"></i></button> 
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" title="delete medication" (click)="deleteMedRow(this.currInd,j)"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-success" title="Close Notes" (click)="closeNotes(this.currInd)">Close</button>
+                    </td>
+                </tr>
+              </table>
+            
+            </div>
+            </div>
+</div>
+</div>
+</div>
+</div>  
+

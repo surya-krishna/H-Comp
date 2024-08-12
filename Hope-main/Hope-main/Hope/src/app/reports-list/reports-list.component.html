@@ -1,0 +1,245 @@
+<div *ngIf="this.role=='role_user'" class="tab-content">
+    <div class="card bg-grey">
+        <div class="card-body" (click)="this.router.navigate(['/addReport']);">
+            <h6 class="card-head-text">Add New Report</h6>
+            <p class="card-desc">Click here to add Report.</p>
+            <button class="btn btn-theam-prim" >Add report</button>
+        </div>
+    </div>
+</div>
+<div class="alert alert-success cust-alert" id="success-alert-detail">
+    <strong>Successfully Deleted Report</strong>
+  </div>
+  <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+    <strong>Failed to Delete Report</strong>
+  </div>
+<h6 style="font-weight: 700;">Reports History:</h6>
+<div class="row">
+    <div class="card col-lg-3 col-md-4 col-sm-6" *ngFor="let repo of recentReports;let i=index">
+        <div class="card-body" (click)="getReport(repo.reportId);">
+            <p class="card-head-text">{{repo.labName}}</p>
+            <p class="test-desc"><label class="label">Date: </label>{{repo.reportDate}}</p>
+            <p class="test-desc"><label class="label">No Of Tests: </label>{{repo.testCount}}</p>
+            <p class="test-desc"><label class="label">Tests: </label><span>{{repo.tests_performed}}</span></p>
+            <button class="btn btn-theam-prim" >View details</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal" #viewReport id="viewReport">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+    
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h6 class="header modal-title" style="width: 100%;">Report Details <span data-toggle="tooltip" data-placement="top" title="Report Details"><i class="fa-regular fa-circle-question"></i></span><button *ngIf="false" class="btn btn-primary" style="float:right">Share Link<i class="fa-solid fa-share-nodes"></i></button></h6>
+          <button type="button" class="close" (click)="closeReport()">&times;</button>
+        </div>
+    
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container row add-group-div">
+            
+    <div class="alert alert-success cust-alert" id="success-alert-detail">
+    <strong>Successfully Added Component</strong>
+  </div>
+  <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+    <strong>Failed to Add Component</strong>
+  </div>
+          <table class="table">
+            <tr>
+                <td><h6 class="label">Lab Name</h6></td>
+                <td>
+                    {{this.inputData.labName}}
+                </td>
+                <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+               
+                <td><h6 class="label">Lab Phone</h6></td>
+                <td>
+                    {{this.inputData.labPhone}}
+                </td>
+            </tr>
+            
+            <tr>
+                <td><h6 class="label">Lab Address</h6></td>
+                <td colspan="2">
+                    {{this.inputData.labAddress}}
+                </td>
+                <td></td>
+                <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+            </tr>
+
+
+            <tr>
+             <td><h6 class="label">Patient Name<span style="color:red">*</span></h6></td>
+              <td>{{this.inputData.nameOnReport}}</td>
+              <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+              <td><h6 class="label">Age<span style="color:red">*</span></h6></td>
+              <td>{{this.inputData.age}}</td>
+            </tr>
+
+            <tr>
+                <td><h6 class="label">Gender<span style="color:red">*</span></h6></td>
+                 <td>{{this.inputData.gender}}</td>
+                 <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+                <td><h6 class="label">Report Date<span style="color:red">*</span></h6></td>
+                <td>
+                  {{this.inputData.reportDate}}
+                </td>
+            </tr>
+           </table>
+
+
+           <h6 class="header"> Report Test Details </h6>  
+          <table class="table">
+            <thead>
+                <tr>
+                    <th>Name<span style="color:red">*</span></th>
+                    <th>Value<span style="color:red">*</span></th>
+                    <th>Units</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            
+            <tr *ngFor="let test of this.inputData.userTestsList;let i=index">
+                <td>
+                    {{this.inputData.userTestsList[i].testName}}
+                </td>
+
+                <td >
+                    {{this.inputData.userTestsList[i].testValue}}
+                </td>
+                
+                <td>
+                    {{this.inputData.userTestsList[i].units}}
+                </td>
+                
+                <td>
+                    {{this.inputData.userTestsList[i].testMinNormal}}
+                </td>
+
+                <td>
+                    {{this.inputData.userTestsList[i].testMaxNormal}}
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="viewObservation(i)" title="View Observation"><i class="fa-solid fa-comment-dots"></i></button>
+                 </td>
+            </tr>
+          </table>
+          <div class="row" style="width:100%">
+          <!--<button *ngIf="this.role=='role_user'" class="btn btn-primary col-3 mx-auto" (click)="verifyForPII()" title="Download pdf">View Original</button>-->
+          <!--<button *ngIf="this.role=='role_doctor'" class="btn btn-primary col-3 mx-auto" (click)="viewOriginal()" title="Download pdf">View Original</button>-->
+          <button *ngIf="this.role=='role_user'" class="btn btn-success col-3 mx-auto" (click)="editReport()" title="Edit report">Edit</button>
+          <button *ngIf="this.role=='role_user'" class="btn btn-danger col-3 mx-auto" (click)="deleteReport(this.inputData.reportId)" title="Delete Report">Delete</button>
+          <button *ngIf="this.role!='role_user'" class="btn btn-danger col-3 mx-auto" (click)="closeReport()" title="close report">Close</button>
+            
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>    
+
+<div class="modal" #addNotes id="addNotes">
+<div class="modal-dialog modal-lg" *ngIf="this.inputData.userTestsList[this.currInd]">
+  <div class="modal-content">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h6 class="header modal-title">Notes For {{this.inputData.userTestsList[this.currInd]&&this.inputData.userTestsList[this.currInd].testName}} <span data-toggle="tooltip" data-placement="top" title="If the results are not normal this notes can help in keeping track of observations and medications recommended by doctor"><i class="fa-regular fa-circle-question"></i></span></h6>
+      <button type="button" class="close" title="close notes" (click)="closeNotes(this.currInd)">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <div class="container row add-group-div">
+        
+        <div class="alert alert-success cust-alert" id="success-alert-detail">
+          <strong>Successfully Added Notes</strong>
+        </div>
+        <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+          <strong>Failed to Add Notes</strong>
+        </div>
+        <div class="col-12">
+          
+          <table class="table">
+            <tr>
+                <td>Observation</td>
+                <td colspan="2">{{this.inputData.userTestsList[this.currInd].observation}}</td>
+            </tr>
+            <tr>
+                <td>Suggestions</td>
+                <td colspan="2">{{this.inputData.userTestsList[this.currInd].suggestion}}</td>
+            </tr>
+            
+            <tr *ngIf="this.inputData.userTestsList[this.currInd].medication">
+                <th>Medication <span data-toggle="tooltip" data-placement="top" title="Medication prescribed based on this test results"><i class="fa-regular fa-circle-question"></i></span></th>
+                <th>Timing <span data-toggle="tooltip" data-placement="top" title="Medication intake timing"><i class="fa-regular fa-circle-question"></i></span></th>
+                
+            </tr>
+            <tr *ngFor="let med of this.inputData.userTestsList[this.currInd].medication;let j=index">
+                <td>{{this.inputData.userTestsList[this.currInd].medication[j].medication}}</td>
+                <td>{{this.inputData.userTestsList[this.currInd].medication[j].timings}}</td>
+                
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn btn-success" title="close notes" (click)="closeNotes(this.currInd)">Close</button>
+                </td>
+            </tr>
+          </table>
+        
+        </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="modal" #download id="download">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+  
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h6 class="header modal-title">Download Alert <span data-toggle="tooltip" data-placement="top" title="This file contains Personal Identifiable Information(PII) data"><i class="fa-regular fa-circle-question"></i></span></h6>
+        <button type="button" class="close" title="close notes" (click)="closeDownload()">&times;</button>
+      </div>
+  
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container row add-group-div">
+          <div class="alert alert-success cust-alert" id="success-dwnl-detail">
+            <strong>Download is Starting</strong>
+          </div>
+          <div class="alert alert-danger cust-alert" id="failure-dwnl-detail">
+            <strong>Password Mismatch</strong>
+          </div>
+          <div class="col-12">
+            <h6 style="font-weight:600">This file contains Personal Identifiable Information(PII) data. So please proceed with caution.</h6>
+            <br/>
+            <table>
+            <tr>
+            <td>Enter Password to download.</td>
+            <td><input type="password" name="password" [(ngModel)]="this.viewerData.password"><!--this.downloadInput.password--></td>
+            </tr>
+            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr>
+              <td colspan="2">
+                <button class="btn btn-primary" (click)="viewOriginal()">Verify</button>
+              </td>
+            </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<app-viewer id="app-viewer" class="col-11 mx-auto" *ngIf="this.appService.viewerIp.reportId!=null&&this.appService.viewerIp.reportId!=''" [viewerInput]="this.viewerData"></app-viewer>-->

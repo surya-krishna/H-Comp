@@ -1,0 +1,64 @@
+@import "../../global";
+
+nav{
+    padding: 5px 10px 5px 10px;
+}
+#merch-nav{
+    background-color: $primary;
+    color:$text-primary;
+    //box-shadow: $shadow-attribute;
+}
+h4{
+    font-weight:100;
+    color: $secondary;
+}
+
+*{
+    color:$text-primary;
+    padding:auto;
+}
+
+.navbar-brand{
+    margin-left:5% ;
+    height:70px !important;
+    border-bottom:3px solid $primary;
+}
+button{
+    border:2px solid $secondary-lite;
+    color:$text-primary !important;
+}
+
+button:hover{
+    background-color:$secondary;
+    color:$text-secondary !important;
+    #fabars{
+        color:#FFF;
+    }
+}
+
+.nav-link{
+    border-bottom:3px solid $primary;
+    color:$text-primary;
+    margin:0px;
+    width:fit-content;
+
+}
+
+.nav-link:hover{
+    border-bottom:3px solid $text-primary;
+    width:fit-content;
+    
+}
+
+.form-inline{
+    margin:5px;
+}
+
+.btn-noback{
+    margin-left: auto;
+    margin-right: 10%;
+    font-weight: 700;
+    border:2px solid $secondary;
+}
+
+

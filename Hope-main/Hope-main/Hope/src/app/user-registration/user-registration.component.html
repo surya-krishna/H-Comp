@@ -1,0 +1,113 @@
+<app-plain-header></app-plain-header>
+<div class="row">
+<!--container nav-tab-container-->
+
+<div class="container row add-group-div col-lg-6 col-md-6 col-sm-10 col-11">
+    <div class="reg-form-div">
+       
+ 
+    <div class="col-10" style="margin:auto">
+
+        <h4 class="description">&nbsp;User Registration</h4>
+        <div class="alert alert-success cust-alert" id="success-alert-detail">
+            <strong>Successfully Added Component</strong>
+          </div>
+          <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+            <strong>Failed to Add Component</strong>
+          </div>
+        <table class="table">
+            <tr>
+            <td><h6><label for="email">Email:</label></h6></td>
+            <td><input required class="form-control" type="text" name="email" id="email" #email="ngModel" [(ngModel)]="this.inputData.emailId">
+                <span *ngIf="email.invalid && (email.dirty || email.touched)" style="color:red">Enter valid Email</span>
+            </td>
+            </tr>
+            <tr>
+                <td><h6><label for="password">Password:</label></h6></td>
+                <td><input required class="form-control" type="password" name="password" id="password" #password="ngModel" [(ngModel)]="this.inputData.password">
+                <span *ngIf="password.invalid && (password.dirty || password.touched)" style="color:red">Enter valid password</span>
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td><h6><label for="conpassword">Confirm Password:</label></h6></td>
+                <td><input required class="form-control" type="password" name="conpassword" id="conpassword" #conpassword="ngModel" [(ngModel)]="this.inputData.conpassword">
+                    <span *ngIf=" (conpassword.dirty || conpassword.touched)&&(conpassword.invalid||this.inputData.password!=conpassword.value)" style="color:red">Enter valid password</span>
+                </td>
+                </tr>
+            <tr>
+            <tr>
+                <td><h6><label for="dob">Date of Birth:</label></h6></td>
+                <td><input required class="form-control" type="date" name="dob" id="dob" #dob="ngModel" [(ngModel)]="this.inputData.dob">
+                    <span *ngIf="dob.invalid && (dob.dirty || dob.touched)" style="color:red">Date of birth is required</span>
+                </td>
+                </tr>
+            <tr>
+            <td><h6><label for="gender">Gender</label></h6></td>
+            <td>
+                <select required class="form-control" placeholder="Select Gender" name="gender" id="gender" #gender="ngModel" [(ngModel)]="this.inputData.gender">
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+                </select>
+                <span *ngIf="gender.invalid && (gender.dirty || gender.touched)" style="color:red">The Gender is Required</span>
+            </td>
+            <!--<td><input type="text" name="part_name" id="part_name" [(ngModel)]="this.inputData.part_name"></td>-->
+            </tr>
+            <tr>
+                <td colspan="2"><button class="btn btn-success col-5" title="signup" (click)="register()">Sign Up</button>
+                <span *ngIf="fail" style="color:red">ALL Fields are Required</span>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>
+  
+<div class="col-lg-6 col-md-6 col-sm-10 col-11">
+  <img class="logo-Image img img-responsive" alt="patient consulting doctor" src="../../assets/consulting.jpg" />
+</div>
+</div>
+
+
+<div class="modal" #verify id="verify">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+    
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h6 class="header modal-title">Activate Account <span data-toggle="tooltip" data-placement="top" title="Account Verification"><i class="fa-regular fa-circle-question"></i></span></h6>
+          <button type="button" class="close" title="close notes" (click)="closeOtp()">&times;</button>
+        </div>
+    
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container row add-group-div">
+            <div class="alert alert-success cust-alert" id="success-otp-detail">
+              <strong>Account Acitvated</strong>
+            </div>
+            <div class="alert alert-danger cust-alert" id="failure-otp-detail">
+              <strong>OTP Mismatch</strong>
+            </div>
+            <div class="col-12">
+              <h6 style="font-weight:600">This is to verify your email id</h6>
+              <br/>
+              <table>
+              <tr>
+              <td>Enter OTP.</td>
+              <td><input type="number" name="otp" #otp otp="ngModel" [(ngModel)]="this.verifyIp.otpCode"><!--this.downloadInput.password--></td>
+              </tr>
+              <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+              <tr>
+                <td colspan="2">
+                  <button class="btn btn-primary" (click)="verifyOtp()">Verify</button>
+                </td>
+              </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,37 @@
+<app-plain-header></app-plain-header>
+
+<div class="row content-div" >
+<!--container nav-tab-container-->
+
+<div class="col-lg-6 col-md-6 col-sm-10 col-11">
+    <h1 class="description">Maintain and share your medical history with your Doctor</h1>
+ <!-- <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#login">Login</a>
+    </li>
+  </ul>
+  -->
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="card">
+        
+        <div class="card-body">
+            <h6 class="card-head-text">User</h6>
+            <p class="card-desc">Maintain all your medical history in on place.</p>
+            <button class="btn btn-theam-prim" (click)="this.router.navigate(['/userReg']);">Sign Up</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-head-text">Doctor</h6>
+            <p class="card-desc">Understand your patients better with HOPE.</p>
+            <button class="btn btn-theam-prim" (click)="this.router.navigate(['/docReg']);">Sign Up</button>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-10 col-11">
+  <img class="fill-Image img img-responsive" alt="Doctor viewing reports online" src="../../assets/doctorOnline.jpg" />
+</div>
+</div>

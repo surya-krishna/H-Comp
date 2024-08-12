@@ -1,0 +1,87 @@
+@import "../../global";
+.tab-content{
+    //border: 1px solid #ccc;
+    height:auto;
+    border-top: 0px;
+    margin: 0px;
+    display: flex;
+  //align-items: center;
+  justify-content: center;
+}
+
+.nav-tab-container{
+    width: fit-content;
+}
+
+.login-form-div{
+    margin: auto;
+}
+.fill-Image{
+    width:inherit;
+    
+}
+.parent {
+    overflow: hidden; /* Hide scrollbars */
+}
+
+.content-div{
+    margin-left: 5%;
+    width: auto !important;
+}
+.description{
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.4em;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+.card{
+    margin-left: 5px !important;
+    margin-top: 15px !important;
+    
+    font-size: 12px;
+    //margin:5px !important;
+    box-shadow: 3px 3px 2px #BBB;
+}
+
+.card:hover{
+    margin-left: 5px !important;
+    margin-top: 15px !important;
+    //margin:5px;
+    border:solid $secondary;
+    box-shadow: 1px 1px 2px #BBB;
+}
+
+.card-head-text{
+    font-weight: 600;
+    text-align: center;
+    margin: 5px;
+    margin-bottom: 1rem;
+}
+
+.card-body{
+    text-align: justify;
+}
+
+.card-body>button{
+    width: 100%;
+}
+
+.card-desc{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.test-desc{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    word-break: break-all;
+}
+label{
+    font-weight: 600;
+}
+
+.btn-theam-prim{
+    background:$secondary;
+    color: $primary;
+}

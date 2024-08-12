@@ -1,0 +1,47 @@
+
+<button class="col-1" *ngIf="lastRoute=='Dashboard'" class="btn btn-xs text-center" (click)="this.router.navigateByUrl('/userDashboard')"><span><i class="fa fa-arrow-left fa-xs"></i></span>&nbsp;Dashboard</button>
+<button class="col-1" *ngIf="lastRoute=='Test'" class="btn btn-xs text-center" (click)="this.router.navigateByUrl('/testList')"><span><i class="fa fa-arrow-left fa-xs"></i></span>&nbsp;Tests</button>
+<div class="container mt-5 mb-5">
+	<div class="row">
+		<div class="col-md-7 offset-md-2">
+			<h5 style="font-weight: 700; text-align: center;">{{this.testName}}</h5>
+			
+			<div *ngIf="this.numbers" class="chart mx-auto col-8 container">
+				<canvas  baseChart class="chart mx-auto col-12"
+					[data]="testBarChartData"
+					[options]="barChartOptions"
+					[plugins]="barChartPlugins"
+					[type]="barChartType">
+			  </canvas>
+		  </div>
+		  <br/>
+		  <h5 style="font-weight: 700; text-align: center;" *ngIf="this.testName&&this.testName!=''">Timeline</h5>
+			<ul class="timeline">
+			
+				<li *ngFor="let test of testData">
+					<h6 [ngClass]="!notNum(test.testValue)&&(notNum(test.testMinNormal)||test.testValue>test.testMinNormal)&&(notNum(test.testMaxNormal)||test.testValue<test.testMaxNormal)?'green':'red'">{{test.testValue}} <span class="float-right">{{test.testDate}}</span></h6>
+					<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-10">
+					<p *ngIf="test.labName&&test.labName!=''"><label class="label">Lab:</label> {{test.labName}}</p>
+					<p *ngIf="!notNum(test.testMinNormal)&&test.testMinNormal!=0"><label class="label">Minimum Value:</label> {{test.testMinNormal}}</p>
+					<p *ngIf="!notNum(test.testMaxNormal)&&test.testMaxNormal!=0"><label class="label">Maximum Value:</label> {{test.testMaxNormal}}</p>
+					<p *ngIf="test.observation&&test.observation!=''"><label class="label">Observation:</label> {{test.observation}}</p>
+					<p *ngIf="test.suggestion&&test.suggestion!=''"><label class="label">Suggestion:</label> {{test.suggestion}}</p>
+					</div>
+					<table class="table col-lg-6 col-md-6 col-sm-6 col-10" *ngIf="test.medication.length!=0">
+						<tr>
+							<th>Medication</th>
+							<th>Timings</th>
+						</tr>
+						<tr *ngFor="let med of test.medication">
+							<td>{{med.medication}}</td>
+							<td>{{med.timings}}</td>
+						</tr>
+					</table>
+					</div>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+</div>

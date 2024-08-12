@@ -1,0 +1,24 @@
+<div style="width:100%">
+<button class="btn btn-primary" (click)="login()" style="margin-left: 40%;"><i class="fa-brands fa-google"></i> Link You Google Account</button><span data-toggle="tooltip" data-placement="top" title="Your data is securely transmitted with Google Fit APIs which uses FHIR standards"><i class="fa-regular fa-circle-question"></i></span>
+</div>
+<h5 *ngIf="this.showNutrition" style="font-weight: 700; text-align: center;">Steps </h5>
+	
+<div *ngIf="this.stepFlag" class="chart mx-auto col-5 container">
+    <canvas  baseChart class="chart mx-auto col-12"
+        [data]="testBarChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType">
+  </canvas>
+</div>
+
+<h5 *ngIf="this.showNutrition" style="font-weight: 700; text-align: center;">Nutition </h5>
+
+<div *ngIf="this.showNutrition" class="chart mx-auto col-5">
+    <h6>Nutrition Intake</h6>
+    <canvas baseChart 
+    [data]="nutChartData"
+    [type]="doughnutChartType"
+    >
+  </canvas>
+</div>

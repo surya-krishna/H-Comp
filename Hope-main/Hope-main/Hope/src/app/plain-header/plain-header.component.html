@@ -1,0 +1,7 @@
+<nav class="navbar navbar-expand-sm" id="merch-nav">
+  <img class="navbar-brand img img-responsive" alt="Hope Logo" src="../../assets/hope.png"/>
+  <button *ngIf="this.router.url != '/login'" title="Login" class="btn btn-noback col-lg-1 col-md-1 col-sm-2 col-3" (click)="this.router.navigate(['/login']);">Login</button>
+  <button *ngIf="this.router.url === '/login'" title="Sign up" class="btn btn-noback col-lg-1 col-md-1 col-sm-2 col-3" (click)="this.router.navigate(['/']);">Sign Up</button>
+  
+  <!--<h4>HOPE</h4>-->
+</nav>

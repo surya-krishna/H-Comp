@@ -1,0 +1,69 @@
+<div class="fullheight row">
+<div class="col-lg-6 col-md-6 col-sm-12 col-12">
+<div *ngIf="this.role=='role_user'">
+    <h6 style="font-weight: 700;">New Consultation</h6>
+    <br/>
+    <table><tr><td><h6 style="font-weight: 600;"><label for="email">Doctor Email :</label></h6></td><td><input type="email" id="email" [(ngModel)]="this.sharing.doctorEmail"></td><td>
+    <button class="col-12 btn btn-primary" title="share profile" (click)="shareProfile()">Share Profile</button></td></tr>
+</table>
+</div>
+
+<br/>
+<div *ngIf="this.activeCon.length!=0" >
+<h6 style="font-weight: 700;">Active Consultations</h6>
+<table *ngIf="this.role=='role_user'" class="table">
+    <tr>
+        <th>DoctorEmail</th>
+        <th>OTP</th>
+        <th>Action</th>
+    </tr>
+    <tr  *ngFor="let cons of this.activeCon">
+        <td>{{cons.userName}}</td>
+        <td >{{cons.otp}}</td>
+        <td><button class="btn btn-danger" title="stop sharing" (click)="stopShare(cons)">Stop Sharing</button></td>
+    </tr>
+</table>
+
+
+
+<div class="alert alert-danger cust-alert" id="failure-alert-detail" style="display:none">
+    <strong>Wrong OTP!!!</strong>
+</div>
+<table *ngIf="this.role=='role_doctor'" class="table">
+    <tr>
+        
+        <th>PatientEmail</th>
+        <th>OTP</th>
+        <th>Action</th>
+    </tr>
+    <tr  *ngFor="let cons of this.activeCon">
+        <td>{{cons.userName}}</td>
+        <td *ngIf="cons.status!='Verified'"><input type="number" [(ngModel)]="this.verifyIp.otp"></td>
+        <td *ngIf="cons.status=='Verified'"><span class="badge badge-success">Verified</span></td>
+        <td *ngIf="cons.status!='Verified'"><button class="btn btn-primary" title="verify otp" (click)="verifyOtp(cons)">Verify</button></td>
+        <td *ngIf="cons.status=='Verified'"><button class="btn btn-danger" title="stop viewing" (click)="stopShare(cons)">Stop Viewing</button></td>
+    </tr>
+</table>
+</div>
+<br/>
+<div *ngIf="this.cons.length!=0" >
+<h6 style="font-weight: 700;">Past Consultations</h6>
+<table  class="table">
+    <tr>
+        <th *ngIf="this.role=='role_user'">DoctorEmail</th>
+        <th *ngIf="this.role=='role_doctor'">PatientEmail</th>
+        <th>Date</th>
+    </tr>
+    <tr *ngFor="let cons of this.cons">
+        <td>{{cons.userName}}</td>
+        <td>{{cons.consultationDate}}</td>
+    </tr>
+</table>
+</div>
+</div>
+
+<div class=" chat col-lg-5 col-md-5 col-sm-12 col-12">
+    <h6 style="font-weight: 700;">To know more about patient Ask Me:</h6>
+    <app-chat></app-chat>
+</div>
+</div>

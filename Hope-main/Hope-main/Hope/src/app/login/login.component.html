@@ -1,0 +1,43 @@
+<app-plain-header></app-plain-header>
+<div class="row">
+<!--container nav-tab-container-->
+
+<div class="col-lg-5 col-md-5 col-sm-10 col-11">
+ <!-- <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#login">Login</a>
+    </li>
+  </ul>
+-->
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="login" class="container tab-pane active row"><br/>
+      <div class="login-form-div col-lg-10 col-md-10 col-sm-12 col-12">
+        <h4 class="description">Login</h4>
+        <form class="form-group login-form">
+          <div class="form-field">
+          <label for="email-id">EmailId:</label>
+          <input class="form-control" type="text" id="email-id" name="email" [(ngModel)]="this.loginData.username">
+          </div>
+          <br/>
+          <div class="form-field">
+              <label for="password">Password:</label>
+              <input class="form-control" type="password" id="password" name="password" [(ngModel)]="this.loginData.password">
+          </div>
+          <br/>
+          
+            <button class="btn btn-theam-prim col-12" title="login" (click)="login()">Login</button>
+            <p *ngIf="this.loginFailed" class="error-msg">Incorrect Credentials!!!</p>
+        </form>
+      </div>    
+    </div>
+    
+    <!--<div id="signUp" class="container tab-pane fade "><br>
+      <app-seller-registration></app-seller-registration>
+    </div>-->
+  </div>
+</div>
+<div class="col-lg-7 col-md-7 col-sm-10 col-11">
+  <img class="logo-Image img img-responsive" alt="doctor and report" src="../../assets/doctorReport.jpg" />
+</div>
+</div>

@@ -1,0 +1,101 @@
+@import '../../global';
+.dashed-box{
+    border: 3px solid $secondary;
+    margin: auto;
+    text-align: center;
+    h5{
+        margin: 5px;
+        font-weight: 600;
+    }
+}
+.dashed-box:hover{
+    border: 3px solid $secondary;
+    background-color: $secondary;
+    color: $primary;
+    margin: auto;
+}
+
+.showall{
+    border: 2px solid $primary;
+    margin: 10px;
+    text-align: center;
+    a{
+    text-decoration: none;
+    color:$secondary-dark !important;
+    }
+}
+
+.showall:hover{
+    border: 2px solid $primary;
+    margin: 10px;
+    text-align: center;
+    h6{
+        font-weight: 700;
+    }
+    a{
+    text-decoration: none;
+    color:$secondary-dark !important;
+    }
+}
+
+.solid-box{
+    border: 2px solid $secondary;
+    margin: 10px;
+    text-align: center;
+    font-size: 12px;
+    p{
+        margin: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.solid-box:hover{
+    border: 2px solid $secondary;
+    //background-color: $secondary;
+    color: $secondary;
+    margin: 10px;
+    text-align: center;
+    font-size: 12px;
+    box-shadow: $shadow-attribute;
+    p{
+        margin: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.freq-tests{
+    h5{
+        font-weight: 600;
+        //padding: 0px;
+    }
+}
+
+.section{
+    margin-top:10px;
+    margin-bottom: 20px;;
+}
+
+.test-desc{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin: inherit;
+    font-size: 12px;
+}
+
+.dashed-empty-box{
+
+    border: 2px solid $primary-dark;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    color: $secondary-dark;
+}
+
+.header{
+    font-weight: 700;
+}
+.chat,.fullheight{
+    height: inherit;
+}

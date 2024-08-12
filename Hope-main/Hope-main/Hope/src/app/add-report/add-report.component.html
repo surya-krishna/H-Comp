@@ -1,0 +1,218 @@
+<h4 style="text-align: center; font-weight: 600;"> Add Report Images</h4>
+<p style="text-align: center;">Take picture of your diagnostics report documents and upload. We will take care of the rest.</p>
+    <br/>
+<div class="row jumbotron jumbotron-fluid" style="width:100%">
+    <div *ngFor="let file of files; let i=index" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="margin-right: 10px;margin-top: 20px; margin-left: auto;">
+        
+        <div class="col-12 items"><img [src]="file.base64String" [alt]="file.name" class="img img-responsive image-display"></div>
+        <button class="btn btn-danger delete-button col-12" (click)="delete(i)">Delete</button>
+    </div>
+    <div id="file-upload" class="row col-lg-3 col-md-3 col-sm-3 col-xs-3 mx-auto" style="margin-right: 10px;margin-top: 20px;"> 
+        <h4  class="col-12">Add Image</h4>
+        <input type="file" title="File Upload" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" name="bulk_upload" id="bulk_upload" accept="image/*" (change)="uploadFile($event)" />
+    </div>
+</div>
+<div *ngIf="this.files.length>0" class="row" style="width:100%">
+    <button class="col-4 btn btn-success mx-auto" (click)="extract()">Upload All Files</button>
+</div>
+<app-loading-mask *ngIf="showLoader" [progress]="progress"></app-loading-mask>
+
+
+
+
+<!--<div class="modal" #addmodal id="addmodal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+  
+        <div class="modal-header">
+          <h4 class="modal-title">Add Component</h4>
+          <button type="button" class="close" (click)="closeadd()">&times;</button>
+        </div>
+  
+        
+        <div class="modal-body">
+          <div class="container row add-group-div">
+            <div class="alert alert-success cust-alert" id="success-alert-detail">
+              <strong>Successfully Added Component</strong>
+            </div>
+            <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+              <strong>Failed to Add Component</strong>
+            </div>
+            <div class="col-12">
+              <h4> Report Main Details </h4>  
+              <table class="table">
+                <tr>
+                    <td><h6>Lab Name</h6></td>
+                    <td>
+                        <input required class="form-control" type="text" name="labName" id="labName" #labName="ngModel" [(ngModel)]="this.inputData.labName">
+                        <span *ngIf="labName.invalid && (labName.dirty || labName.touched)" style="color:red">The Field is Required</span>
+                    </td>
+                   
+                   
+                    <td><h6>Lab Phone</h6></td>
+                    <td>
+                        <input class="form-control" type="text" name="labPhone" id="labPhone" #labPhone="ngModel" [(ngModel)]="this.inputData.labPhone">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><h6>Lab Address</h6></td>
+                    <td colspan="2">
+                        <textarea class="form-control"  name="labAddress" id="labAddress" #labAddress="ngModel" [(ngModel)]="this.inputData.labAddress"></textarea>
+                    </td>
+                    <td></td>
+                   
+                </tr>
+
+
+                <tr>
+                 <td><h6>Patient Name</h6></td>
+                  <td>
+                    <input required class="form-control" type="text" name="patientName" id="patientName" #patientName="ngModel" [(ngModel)]="this.inputData.nameOnReport">
+                    <span *ngIf="patientName.invalid && (patientName.dirty || patientName.touched)" style="color:red">The Field is Required</span>
+                  </td>
+                  
+                  <td><h6>Age</h6></td>
+                  <td><input required class="form-control" type="number" name="age" id="age" #age="ngModel" [(ngModel)]="this.inputData.age">
+                    <span *ngIf="age.invalid && (age.dirty || age.touched)" style="color:red">The Field is Required</span>
+                  </td>
+                </tr>
+
+                <tr>
+                    <td><h6>Gender</h6></td>
+                     <td>  
+                        <select required class="form-control" placeholder="Select Option" name="gender" id="gender" #gender="ngModel" [(ngModel)]="this.inputData.gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <span *ngIf="gender.invalid && (gender.dirty || gender.touched)" style="color:red">The Field is Required</span>
+                     </td>
+                    
+                    <td><h6>Report Date</h6></td>
+                    <td>
+                        <input required type="date" class="form-control"  name="reportDate" id="reportDate" #reportDate="ngModel" [(ngModel)]="this.inputData.reportDate">
+                        <span *ngIf="reportDate.invalid && (reportDate.dirty || reportDate.touched)" style="color:red">The Field is Required</span>
+                    </td>
+                </tr>
+               </table>
+
+
+               <h4> Report Test Details </h4>  
+              <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>Units</th>
+                        <th>min</th>
+                        <th>max</th>
+                        <th>Action</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                
+                <tr *ngFor="let test of this.inputData.userTestsList;let i=index">
+                    <td>
+                        <input type="text" required class="form-control" placeholder="Select Option" name="testName_{{i}}" id="testName_{{i}}" [(ngModel)]="this.inputData.userTestsList[i].testName">
+                           
+                        <span *ngIf="false" style="color:red">The Field is Required</span>
+                    </td>
+
+                    <td *ngIf="this.testMasterMap[this.inputData.userTestsList[i].testMasterId]&&this.testMasterMap[this.inputData.userTestsList[i].testMasterId].testResultText=='Number'">
+                        <input required type="text" class="form-control"  name="testValue_{{i}}" id="testValue_{{i}}"  [(ngModel)]="this.inputData.userTestsList[i].testValue">
+                    </td>
+                    <td *ngIf="this.testMasterMap[this.inputData.userTestsList[i].testMasterId]&&this.testMasterMap[this.inputData[i].testMasterId].testResultText!='Number'">
+                        <input required type="text" class="form-control"  name="testValue_{{i}}" id="testValue_{{i}}"  [(ngModel)]="this.inputData.userTestsList[i].testResultType">
+                    </td>
+                    
+                    <td>
+                        <input type="text"  class="form-control" placeholder="Select Option" name="testUnit_{{i}}" id="testUnit_{{i}}" [(ngModel)]="this.inputData.userTestsList[i].units">
+                    </td>
+                    
+                    <td>
+                        <input  type="number" class="form-control"  name="testMin_{{i}}" id="testMin_{{i}}"  [(ngModel)]="this.inputData.userTestsList[i].testMinNormal">
+                    </td>
+
+                    <td>
+                        <input  type="number" class="form-control"  name="testMax_{{i}}" id="testMax_{{i}}"  [(ngModel)]="this.inputData.userTestsList[i].testMaxNormal">
+                    </td>
+                    
+                    <td>
+                       <button class="btn btn-primary" (click)="addRow(i)">+</button> <button class="btn btn-danger" (click)="deleteRow(i)">X</button>
+                    </td>
+                    
+                    <td>
+                        <button class="btn btn-primary" (click)="addObservation(i)">Add Notes</button>
+                     </td>
+                </tr>
+              </table>
+
+
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" #addNotes id="addNotes">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+  
+      
+        <div class="modal-header">
+          <h4 class="modal-title">Notes For {{this.inputData.userTestsList[this.currInd].testMasterId && this.testMasterMap[this.inputData.userTestsList[this.currInd].testMasterId].testName}}</h4>
+          <p>If the results are not normal this notes can help in keeping track of observations and medications recommended by doctor</p>
+          <button type="button" class="close" (click)="closeNotes()">&times;</button>
+        </div>
+  
+       
+        <div class="modal-body">
+          <div class="container row add-group-div">
+            <div class="alert alert-success cust-alert" id="success-alert-detail">
+              <strong>Successfully Added Component</strong>
+            </div>
+            <div class="alert alert-danger cust-alert" id="failure-alert-detail">
+              <strong>Failed to Add Component</strong>
+            </div>
+            <div class="col-12">
+              <h4> Observation Details </h4>  
+              <table class="table">
+                <tr>
+                    <td>Observation</td>
+                    <td colspan="2"><textarea class="form-control"  name="observation_{{this.currInd}}"  [(ngModel)]="this.inputData.userTestsList[this.currInd].observation"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Suggestions</td>
+                    <td colspan="2"><textarea class="form-control"  name="suggestion_{{this.currInd}}"  [(ngModel)]="this.inputData.userTestsList[this.currInd].suggestion"></textarea></td>
+                </tr>
+                <tr><td colspan="3">Medication</td></tr>
+                <tr *ngFor="let med of this.inputData.userTestsList[this.currInd].medication;let j=index">
+                    <td><input type="text" class="form-control"  name="medication_{{this.currInd}}_{{j}}"  [(ngModel)]="this.inputData.userTestsList[this.currInd].medication[j].medication"></td>
+                    <td><select class="form-control" placeholder="Select Option" name="timings_{{this.currInd}}_{{j}}" id="timings_{{this.currInd}}_{{j}}" [(ngModel)]="this.inputData.userTestsList[this.currInd].medication[j].timings">
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="night">Night</option>
+                    </select></td>
+                    <td>
+                        <button class="btn btn-primary" (click)="addMedRow(this.currInd,j)">+</button> <button class="btn btn-danger" (click)="deleteMedRow(this.currInd,j)">X</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-success" (click)="closeNotes()">Close</button>
+                    </td>
+                </tr>
+              </table>
+            
+            </div>
+            </div>
+</div>
+</div>
+</div>
+</div>  -->
+

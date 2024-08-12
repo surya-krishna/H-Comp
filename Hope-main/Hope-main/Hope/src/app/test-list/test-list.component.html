@@ -1,0 +1,14 @@
+
+<h6 style="font-weight: 700;">Test Wise History</h6>
+<div class="row">
+    <div class="card col-lg-3 col-md-4 col-sm-4 " *ngFor="let test of freqTest;let i=index">
+        <div class="card-body" (click)="timeLine(test.testName)">
+            <p class="card-head-text">{{test.testName}}</p>
+            <p class="test-desc"><label class="label">Count: </label> {{test.count}}</p>
+            <p class="test-desc" *nfIf="test.testValue!=0"><label class="label">Avg.Values: </label> {{test.testValue}}</p>
+            <p class="test-desc" *ngIf="test.normalMin!=0"><label class="label">Normal Min: </label> <span> {{test.normalMin}}</span></p>
+            <p class="test-desc" *ngIf="test.normalMax!=0"><label class="label">Normal Max: </label> <span> {{test.normalMax}}</span></p>
+            <button class="btn btn-theam-prim" title="view details">View details</button>
+        </div>
+    </div>
+</div>

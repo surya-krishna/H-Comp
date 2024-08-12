@@ -1,0 +1,4 @@
+<div [ngClass]="blockUrls.indexOf(this.router.url)==-1?'body '+getBodyClass():'body-full'">
+   
+    <router-outlet></router-outlet>
+</div>
